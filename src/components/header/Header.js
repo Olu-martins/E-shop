@@ -44,7 +44,7 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth).then(() => {
       toast.success('Logout successful...')
-      navigate('/')
+      navigate('/login')
     }).catch((error) => {
       toast.error(error.massage)
 });

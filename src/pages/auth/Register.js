@@ -32,7 +32,7 @@ const Register = () => {
                 const user = userCredential.user;
                 console.log(user)
                 setIsLoading(false)
-                toast.success('Registration Successful...')
+                toast.success('Registration Successfully...')
                 navigate('/login')
             })
             .catch((error) => {

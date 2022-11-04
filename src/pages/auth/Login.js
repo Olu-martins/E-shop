@@ -4,10 +4,11 @@ import loginImg from '../../assets/login.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaGoogle } from 'react-icons/fa'
 import Card from '../../components/card/Card'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from '../../firebase/config'
 import { toast } from 'react-toastify'
 import Loader from '../../components/loader/Loader'
+
 
 const Login = () => {
     const [ email, setEmail ] = useState()
@@ -18,11 +19,12 @@ const Login = () => {
 
     const loginUser = e => {
         e.preventDefault()
+
         setIsLoading(true)
+
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user)
                 setIsLoading(false)
                 toast.success('Login Successful...')
                 navigate('/')
@@ -31,7 +33,20 @@ const Login = () => {
                 toast.error(error.message)
                 setIsLoading(false)
             });
+    }
 
+    const provider = new GoogleAuthProvider();
+
+    const signInWithGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+            const user = result.user;
+                toast.success('Log in successfully...')
+                navigate('/')
+            })
+            .catch((error) => {
+                toast.error(error.message)
+  });
     }
 
     return (
@@ -53,7 +68,7 @@ const Login = () => {
                             </div>
                             <p>-- or --</p>
                         </form>
-                        <button type='submit' className='--btn --btn-danger --btn-block'><FaGoogle /> Login With Google</button>
+                        <button type='submit' className='--btn --btn-danger --btn-block' onClick={signInWithGoogle}><FaGoogle /> Login With Google</button>
                         <span className={styles.register}>
                             <p>Don't have an account?</p>
                             <Link to="/register">Register</Link>
