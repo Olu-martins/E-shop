@@ -21,6 +21,7 @@ const Register = () => {
 
     const registerUser = e => {
         e.preventDefault()
+        console.log(email, password, confirmPassword)
         if (password !== confirmPassword) {
             toast.error('password do not match.')
         }
@@ -29,6 +30,7 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                console.log(user)
                 setIsLoading(false)
                 toast.success('Registration Successful...')
                 navigate('/login')
@@ -48,9 +50,9 @@ const Register = () => {
                     <div className={styles.form}>
                         <h2>Register</h2>
                         <form action="" onSubmit={registerUser}>
-                            <input type="text" placeholder='Email' required value={email} onChange={e => setEmail(e.target.value)} />
-                            <input type="password" placeholder='Choose a new password' required value={password} onChange={e => setPassword(e.target.value)} />
-                            <input type="password" placeholder='Confirm password' required value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                            <input type="text" placeholder='Email'  value={email} onChange={e => setEmail(e.target.value)} required/>
+                            <input type="password" placeholder='Choose a new password'  value={password} onChange={e => setPassword(e.target.value)} required/>
+                            <input type="password" placeholder='Confirm password'  value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required/>
                             <button type='submit' className='--btn --btn-primary --btn-block'>Register</button>
                         </form>
                         <span className={styles.register}>
