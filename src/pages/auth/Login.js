@@ -17,6 +17,10 @@ const Login = () => {
 
     const navigate = useNavigate()
 
+    const handleLoginEmailInput = e => {
+        setEmail(e.target.value)
+    }
+
     const loginUser = e => {
         e.preventDefault()
 
@@ -60,7 +64,7 @@ const Login = () => {
                     <div className={styles.form}>
                         <h2>Login</h2>
                         <form action="" onSubmit={loginUser}>
-                            <input type="text" placeholder='Email' required value={email} onChange={e => setEmail(e.target.value)} />
+                            <input type="text" placeholder='Email' required value={email} onChange={handleLoginEmailInput} />
                             <input type="password" placeholder='Password' required value={password} onChange={e => setPassword(e.target.value)} />
                             <button className='--btn --btn-primary --btn-block'>Login</button>
                             <div className={styles.links}>

@@ -14,6 +14,10 @@ const Password = () => {
     const [ email, setEmail ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false)
 
+    const handleResetPasswordInput = e => {
+        setEmail(e.target.value)
+    }
+
     const resetPassword = e => {
         e.preventDefault()
         setIsLoading(true)
@@ -41,7 +45,7 @@ const Password = () => {
                     <div className={styles.form}>
                         <h2>Reset Password</h2>
                         <form action="" onSubmit={resetPassword}>
-                            <input type="text" placeholder='Email' value={email} onChange={e => setEmail(e.target.value)} required />
+                            <input type="text" placeholder='Email' value={email} onChange={handleResetPasswordInput} required />
                             <button type='submit' className='--btn --btn-primary --btn-block'>Reset Password</button>
                             <div className={styles.links}>
                                 <p>
